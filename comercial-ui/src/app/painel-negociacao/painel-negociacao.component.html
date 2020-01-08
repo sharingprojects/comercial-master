@@ -1,22 +1,29 @@
 <!--Pipe--><!--{{ oportunidade | json }} -->
 
 <div class="ui-g">
+  <p-toast></p-toast>
+  <p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <p-panel header="Administração de Oportunidades" [style]="{width: '70%', margin: '0 auto'}">
   <div style="margin-bottom: 20px">
     <p-menubar [model]="itens"></p-menubar> 
   </div>
-  <p-table [value]="oportunidades" [columns]="cols" [paginator]="true" [rows]="5">
+  <p-table [value]="oportunidades" [columns]="cols" [responsive]="true" 
+           selectionMode="single" [(selection)]="selectedOportunidade" dataKey="id"
+           [paginator]="true" [rows]="5">
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th *ngFor="let col of columns">
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
             {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" 
+                        ariaLabelDesc="Activate to sort in descending order" 
+                        ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
           </th>          
         </tr>
       </ng-template>
     
       <ng-template pTemplate="body" let-oportunidade let-columns="columns">
-        <tr>
-          <td *ngFor="let col of columns">
+        <tr [pSelectableRow]="oportunidade">
+          <td *ngFor="let col of columns" >
             {{oportunidade[col.field]}}
           </td>
         
@@ -24,16 +31,8 @@
       </ng-template>
     </p-table>
 </p-panel>
-<p-dialog header="Nova Oportunidade" [responsive]="true" [style]="{width: '400px'}" [(visible)]="displaySaveDialog" [modal]="true">
+<p-dialog header="Oportunidade" [responsive]="true" [style]="{width: '400px'}" [(visible)]="displaySaveDialog" [modal]="true">
   <div class="ui-g ui-fluid">
-    <div class="ui-g-12">
-        <div class="ui-g-4">
-            <label for="id">ID</label>
-        </div>
-        <div class="ui-g-8">
-            <input pInputText id="id" [(ngModel)]="oportunidade.id" autofocus />
-        </div>
-    </div>
     <div class="ui-g-12">
         <div class="ui-g-4">
             <label for="descricao">Descrição</label>
@@ -59,6 +58,11 @@
         </div>
     </div>
 </div>
+<p-footer>
+  <div class="ui-dialog-buttonpane ui-helper-clearfix">
+     <button type="button" pButton icon="pi pi-check" (click)="save()" label="Salvar"></button>
+  </div>
+</p-footer>
 </p-dialog>
 </div>
 

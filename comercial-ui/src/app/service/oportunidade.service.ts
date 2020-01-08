@@ -14,24 +14,24 @@ import { Oportunidade } from 'src/model/oportunidade';
 export class OportunidadeService {
 
   //url do recurso de oportunidades
-  apiUrl:string = 'http://localhost:8080//api/v1/oportunidades';
+  apiUrl:string = 'http://localhost:8080/api/v1/oportunidades';
 
   constructor(private http: HttpClient) { }
 
-  getAll() : Observable<any>{
+  getAll(): Observable<any> {
         //não retorna uma json, mas sim um tipo observable
     return this.http.get(this.apiUrl + "/all");
   }
 
 
-  //add(oportunidade: Oportunidade) {
-  //  return this.http.post(this.apiUrl + oportunidade);
-  // }
+  save(oportunidade: Oportunidade): Observable<any> {
+   return this.http.post(this.apiUrl + "/save", oportunidade);
+  }
 
+  delete(id: number): Observable<any>{
+    return this.http.get(this.apiUrl + "/delete/"+id);
+  }
 
-  //adicionar(oportunidade: any) {
-  //return this.http.post(this.apiUrl, oportunidade);
- //}
 
   
 }

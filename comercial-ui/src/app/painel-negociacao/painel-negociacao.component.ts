@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OportunidadeService } from '../service/oportunidade.service';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { MenuItem } from 'primeng/api'
 import { Oportunidade } from 'src/model/oportunidade';
 
@@ -20,19 +21,27 @@ export class PainelNegociacaoComponent implements OnInit {
     valor: null
   };
 
+  selectedOportunidade: Oportunidade ={
+    id: null,
+    descricao: null,
+    nomeProspecto: null,
+    valor: null
+  }
   //formatação dinâmica das colunas
   cols: any[];
   itens: MenuItem[];
   displaySaveDialog: boolean = false;
+ 
+
 
   constructor(
     private oportunidadeService: OportunidadeService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmService: ConfirmationService
+
     ) { }
 
-   
-  //ele é chamado quando o componente está tudo pronto
-  ngOnInit() {
+   ngOnInit() {
 
     this.consultar();
 
@@ -48,31 +57,33 @@ export class PainelNegociacaoComponent implements OnInit {
       {
         label: 'Novo', 
         icon: 'pi pi-fw pi-plus',
-        command: () => this.showSaveDialog()    
+        command: () => this.showSaveDialog(false)    
        },
        {
         label: 'Editar',
-        icon: 'pi pi-fw pi-pencil'     
+        icon: 'pi pi-fw pi-pencil',
+        command: () => this.showSaveDialog(true)      
+      },
+      {
+        label: 'Remover',
+        icon: 'pi pi-fw pi-times',
+        command: () => this.delete()
+           
       }
   ];
 }
   
  
-
   consultar(){
-    /*
-    fazer a consulta no service e atribuir a variável oportunidades
-    me retorna um objeto do tipo observable, então tenho que escutar e me inscrever nesse objeto,
-    pois quando tiver uma resposta, lembrando que é uma requisição assícrona, pode durar menos de 1s
-    ou 10s, mas o ponto aqui é saber quando a resposta vier, por isso que me subscrevo nesse objeto para saber
-    quando tiver alguma resposta, então quando tiver uma resposta eu atribuo a uma variável */
     this.oportunidadeService.getAll().subscribe(
       (resultado: any) => {
         let listOportunidadesAtualizada: Oportunidade[] = [];
+
         for (let i = 0; i < resultado.length; i++) {
           let op = resultado[i] as Oportunidade;
           listOportunidadesAtualizada.push(op);
         }
+
         this.oportunidades = listOportunidadesAtualizada;
       },
       error => {
@@ -82,36 +93,94 @@ export class PainelNegociacaoComponent implements OnInit {
 
 }
 
-showSaveDialog(){
-  this.displaySaveDialog = true;
-      
+showSaveDialog(editar: boolean){
+  
+  if (editar) {
+    if (this.selectedOportunidade != null && this.selectedOportunidade.id != null) {      
+      this.oportunidade = this.selectedOportunidade;       
+    } else {
+        this.showMessagemNotSelection();   
+        return;
+    } 
+  } else {
+    this.oportunidade = new Oportunidade();   
+  }
+  this.displaySaveDialog = true;      
 }
 
-  /*adicionar() {
-    this.oportunidadeService.add(this.oportunidade)
-        .subscribe(() => {
-          //limpa os campos
-          this.oportunidade = {};
-          //atualiza os dados na tabela
-          this.consultar();
-
-          this.messageService.add({
-               severity: 'success',
-               summary: 'Oportunidade adicionada com sucesso!'
-          });
+save(){
+  this.oportunidadeService.save(this.oportunidade)  
+      .subscribe(
+         (resultado:any) => {
+           let oportunidade = resultado as Oportunidade;
+           this.validaOportunidade(oportunidade);
+           this.messageService.add({
+                severity: 'success',
+                summary: 'Oportunidade adicionada com sucesso!'
+           });
         },
         resposta => {    
-          let msg = 'Erro inesperado. Tente novamente!';
+            let msg = 'Erro inesperado. Tente novamente.';
 
-          //pegar essa msg do json, da api
-          if (resposta.error.msg) {
-            msg = resposta.error.msg;
-          }
-          
-          this.messageService.add({
-               severity: 'error',
-               summary: msg
-        });        
-  });  
- }  */
+           //pegar essa msg do json, da api
+           if (resposta.error.message) {
+              msg = resposta.error.message;
+            }              
+           this.messageService.add({severity: 'error', summary: msg});
+         }         
+      );
+      this.displaySaveDialog = false;
+}
+
+delete(){
+
+  if (this.selectedOportunidade == null || this.selectedOportunidade.id == null){
+    this.showMessagemNotSelection();
+    return;
+  }  
+
+  let idExcluido: number = this.selectedOportunidade.id;
+
+  this.confirmService.confirm({
+     message: "Tem certeza que deseja excluir esse registro?",     
+     accept: () => {
+      this.oportunidadeService.delete(this.selectedOportunidade.id).subscribe(
+        (resultado: any) => {                    
+          this.messageService.add({ severity: 'success', 
+                                    summary: "Resultado", 
+                                    detail: "Registro com id '"+idExcluido+"' foi excluído com sucesso."});
+          this.deletaObjectoDaLista();
+        })
+     }
+   })
+}
+
+deletaObjectoDaLista(){
+
+  let index = this.oportunidades.indexOf(this.selectedOportunidade);
+  this.oportunidades = this.oportunidades.filter((val, i) => i != index);
+ 
+}
+
+validaOportunidade(oportunidade: Oportunidade){
+
+  let index = this.oportunidades.findIndex((e) => e.id == oportunidade.id);
+
+  if (index != -1){
+    this.oportunidades[index] = oportunidade;
+  } else {
+    this.oportunidades.push(oportunidade);
+  }
+}
+
+showMessagemNotSelection() {
+  
+    this.messageService.add({severity : 'warn', 
+                             summary: 'Atenção!',
+                             detail: 'Por favor selecione um registro'});                             
+    
+   
+}
+
+ 
 }

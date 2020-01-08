@@ -13,11 +13,12 @@ import { MessageService } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 import { AppComponent } from './app.component';
 import { PainelNegociacaoComponent } from './painel-negociacao/painel-negociacao.component'
-
 
 
 @NgModule({
@@ -38,10 +39,13 @@ import { PainelNegociacaoComponent } from './painel-negociacao/painel-negociacao
     ToastModule,
     MenuModule,
     MenubarModule,
-    DialogModule
-
+    DialogModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService],
+  providers: [
+    MessageService, 
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
