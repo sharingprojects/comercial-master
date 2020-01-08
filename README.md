@@ -1,2 +1,2 @@
 # comercial-master
-Projeto com Spring e Angular
+Projeto de API com SpringBoot e Angular 8
