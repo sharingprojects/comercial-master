@@ -24,7 +24,7 @@ import com.sharingprojects.comercial.repository.OportunidadeRepository;
 
 //GET http://localhost:8080/api/v1/oportunidades/
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/oportunidades/")
 public class OportunidadeController {
@@ -53,7 +53,7 @@ public class OportunidadeController {
 	 * @RequestBody = converte o Json para um objeto
 	 * @Valid = indica que é preciso validar o objeto antes de salvar
 	 */
-	@PostMapping
+	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Oportunidade adicionar(@Valid @RequestBody Oportunidade oportunidade) {
 
@@ -89,8 +89,8 @@ public class OportunidadeController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Oportunidade> Delete(@PathVariable Long id)
+	@RequestMapping(value = "/delete/{id}")
+    public ResponseEntity<Oportunidade> delete(@PathVariable Long id)
     {
         Optional<Oportunidade> oportunidadeAremover = oportunidades.findById(id);
         
