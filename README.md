@@ -7,6 +7,7 @@
  - Spring mySql-drive
  - Maven
  - Spring lombox
+ 
 <h2> Table in Mysql Database</h2>
 
 ![tabela_banco_mysql](https://user-images.githubusercontent.com/46638575/72249532-58f6d180-35d8-11ea-8daa-5f8c16b4948d.jpg)
@@ -32,3 +33,12 @@ PUT (Api-get-1):
 DELETE (Api-delete-1):
 
 ![delete](https://user-images.githubusercontent.com/46638575/73288494-d8d88a80-41d9-11ea-8794-a2988a195124.jpg)
+
+
+   <h1> Consumir a API - Front-end	</h1>
+
+ - Angular 8
+ - PrimeNG
+ 
+<h2> Tela Inicial  </h2>
+
