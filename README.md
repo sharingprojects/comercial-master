@@ -13,6 +13,10 @@
 
 <h2> Using Postman for API Testing: </h2>
 
+SAVE:
+
+
+
 GET (findAll):
 
 ![api_all_1](https://user-images.githubusercontent.com/46638575/72248992-34e6c080-35d7-11ea-9c0d-cfa0e826db88.jpg)
@@ -24,3 +28,7 @@ GET (Api-get-1):
 PUT (Api-get-1):
 
 ![put](https://user-images.githubusercontent.com/46638575/73233613-ce7ca900-4165-11ea-8c94-cfa75ffdbb78.jpg)
+
+DELETE (Api-delete-1):
+
+![delete](https://user-images.githubusercontent.com/46638575/73288494-d8d88a80-41d9-11ea-8794-a2988a195124.jpg)
