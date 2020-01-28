@@ -13,9 +13,9 @@
 
 <h2> Using Postman for API Testing: </h2>
 
-SAVE:
+POST:
 
-
+![post](https://user-images.githubusercontent.com/46638575/73289591-bfd0d900-41db-11ea-9f5a-111df0f0eda0.jpg)
 
 GET (findAll):
 
