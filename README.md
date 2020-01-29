@@ -34,7 +34,7 @@ DELETE (Api-delete-1):
 
 ![delete](https://user-images.githubusercontent.com/46638575/73288494-d8d88a80-41d9-11ea-8794-a2988a195124.jpg)
 
-
+<hr>
    <h1> Consumir a API - Front-end	</h1>
 
  - Angular 8
