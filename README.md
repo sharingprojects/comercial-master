@@ -46,11 +46,19 @@ Tela inicial
 
 ![tela_inicial](https://user-images.githubusercontent.com/46638575/73323623-d05a7100-4226-11ea-9f5c-56b015a1e126.jpg)
 
-Nova oportunidade
+Nova Oportunidade
 
 ![dialog_novo](https://user-images.githubusercontent.com/46638575/73324805-026dd200-422b-11ea-85c5-87cd79136e45.jpg)
 
 ![msg_success_novo](https://user-images.githubusercontent.com/46638575/73324891-46f96d80-422b-11ea-9d6d-308271ee19ce.jpg)
+
+Mensagem validação de seleção de registro:
+
+![msg_delete_not_selection](https://user-images.githubusercontent.com/46638575/73325083-dd2d9380-422b-11ea-9451-ff8d878f4622.jpg)
+
+Editar Oportunidade
+
+![dialog_editar](https://user-images.githubusercontent.com/46638575/73325186-444b4800-422c-11ea-8bd7-5966883f9fe3.jpg)
 
 
 
