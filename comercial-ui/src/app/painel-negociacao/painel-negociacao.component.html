@@ -31,7 +31,7 @@
       </ng-template>
     </p-table>
 </p-panel>
-<p-dialog header="Oportunidade" [responsive]="true" [style]="{width: '400px'}" [(visible)]="displaySaveDialog" [modal]="true">
+<p-dialog header="{{ oportunidade.id == null ? 'Nova Oportunidade' : 'Editar Oportunidade'}}" [responsive]="true" [style]="{width: '400px'}" [(visible)]="displaySaveDialog" [modal]="true">
   <div class="ui-g ui-fluid">
     <div class="ui-g-12">
         <div class="ui-g-4">
