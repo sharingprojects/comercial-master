@@ -70,6 +70,9 @@ Delete Oportunidade
 
 ![confirmacao_exclusao](https://user-images.githubusercontent.com/46638575/73674574-96a6c180-468f-11ea-91e1-f9e56809af4b.jpg)
 
+![msg_result_delete](https://user-images.githubusercontent.com/46638575/73675921-20578e80-4692-11ea-94cc-6147e6e8469b.jpg)
+
+
 
 
 
