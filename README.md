@@ -66,6 +66,12 @@ Editar Oportunidade
 
 ![dialog_editar](https://user-images.githubusercontent.com/46638575/73325186-444b4800-422c-11ea-8bd7-5966883f9fe3.jpg)
 
+Delete Oportunidade
+
+![confirmacao_exclusao](https://user-images.githubusercontent.com/46638575/73674574-96a6c180-468f-11ea-91e1-f9e56809af4b.jpg)
+
+
+
 
 
 
